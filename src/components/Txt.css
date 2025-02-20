@@ -1,0 +1,9 @@
+.container {
+  width: 465px;
+}
+
+.smallParagraph {
+  font-size: 16px;
+  font-weight: 400;
+  color: #626c7f;
+}
