@@ -6,6 +6,10 @@
   color: #313e51;
 }
 
+button{
+  cursor: pointer;
+}
+
 .background {
   position: absolute;
   z-index: -3;
@@ -45,4 +49,23 @@
   width: 960px;
   height: 356px;
   display: flex;
+}
+
+.AnswersBox {
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Submit {
+  padding: 15px;
+  border: none;
+  outline: none;
+  background-color: #a729f5;
+  border-radius: 24px;
+  display: grid;
+  width: 100%;
+  place-items: center;
+  font-size: 13px;
 }
