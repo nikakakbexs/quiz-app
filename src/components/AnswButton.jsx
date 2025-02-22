@@ -8,7 +8,10 @@ const AnswButton = ({
   BoxColor,
   IsCorrect,
   IsSubmited,
-  QuizzStarted,
+  QuestionInProgress,
+  setTopic,
+  setQuizzInProgress,
+  setQuestionInProgress,
 }) => {
   const [isCliked, setisCliked] = useState(false);
 
@@ -27,9 +30,13 @@ const AnswButton = ({
               : "3px solid transparent"
           }`,
         }}
-        onClick={() => {
-          if (QuizzStarted) {
+        onClick={(e) => {
+          if (QuestionInProgress) {
             setisCliked(!isCliked);
+          } else {
+            setTopic(Answr);
+            setQuizzInProgress(true);
+            setQuestionInProgress(true);
           }
         }}
       >
@@ -55,6 +62,7 @@ const AnswButton = ({
             style={{
               width: `${img == "./CSS.png" ? "16px" : "22px"}`,
               height: "22px",
+              display: `${img == null ? "none" : ""}`,
             }}
           />
           {Number}
@@ -69,7 +77,9 @@ const AnswButton = ({
               IsCorrect & !IsSubmited & isCliked
                 ? "0"
                 : IsCorrect & IsSubmited & isCliked
-                ? ""
+                ? "1"
+                : IsCorrect & IsSubmited & !isCliked
+                ? "1"
                 : "0"
             }`,
           }}
@@ -83,7 +93,7 @@ const AnswButton = ({
               !IsCorrect & !IsSubmited & isCliked
                 ? "0"
                 : !IsCorrect & IsSubmited & isCliked
-                ? ""
+                ? "1"
                 : "0"
             }`,
           }}
