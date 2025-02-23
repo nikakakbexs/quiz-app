@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import AnswButton from "./components/AnswButton";
 import Txt from "./components/Txt";
+import { data } from "./components/Data.js";
 
 function App() {
-
-  const [IsSubmited, setIsSubmited] = useState(false)
+  const [IsSubmited, setIsSubmited] = useState(false);
   const [QuestionInProgress, setQuestionInProgress] = useState(false);
+  const [QuizzInProgress, setQuizzInProgress] = useState(false);
+  const [Topic, setTopic] = useState("none");
+  const [Question, setQuestion] = useState(data);
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    setQuestion(data.find((el) => el.title === Topic));
+  }, [Topic]);
 
   return (
     <div className="main">
@@ -25,49 +33,61 @@ function App() {
       <div className="QuestionContainer">
         <Txt />
         <div className="AnswersBox">
-          <AnswButton
-            BoxColor="#FFF1E9"
-            img="./HTML.png"
-            Number=""
-            Answr="HTML"
-            IsSubmited={IsSubmited}
-            QuizzStarted={QuestionInProgress}
-            IsCorrect={true}
-          />
-          <AnswButton
-            BoxColor="#E0FDEF"
-            img="./CSS.png"
-            Number=""
-            Answr="CSS"
-            QuizzStarted={QuestionInProgress}
-            IsSubmited={IsSubmited}
-          />
-          <AnswButton
-            BoxColor="#EBF0FF"
-            img="./JS.png"
-            Number=""
-            Answr="Javascript"
-            QuizzStarted={QuestionInProgress}
-            IsSubmited={IsSubmited}
-          />
-          <AnswButton
-            BoxColor="#F6E7FF"
-            img="./ACC.png"
-            Number=""
-            Answr="Accessibility"
-            QuizzStarted={QuestionInProgress}
-            IsSubmited={IsSubmited}
-          />
+          {QuizzInProgress
+            ? Question
+              ? Question.questions[step].options.map((el, i) => (
+                  <AnswButton
+                    BoxColor="#F4F6FA"
+                    img={null}
+                    Number={
+                      i == 0
+                        ? "A"
+                        : i == 1
+                        ? "B"
+                        : i == 2
+                        ? "C"
+                        : i == 3
+                        ? "D"
+                        : ""
+                    }
+                    Answr={el}
+                    IsSubmited={IsSubmited}
+                    QuestionInProgress={QuestionInProgress}
+                    setQuizzInProgress={setQuizzInProgress}
+                    IsCorrect={
+                      Question.questions[step].answer == el ? true : false
+                    }
+                  />
+                ))
+              : null
+            : data.map((el) => (
+                <AnswButton
+                  BoxColor={el.bg}
+                  img={el.icon}
+                  Number=""
+                  Answr={el.title}
+                  IsSubmited={IsSubmited}
+                  QuestionInProgress={QuestionInProgress}
+                  setQuestionInProgress={setQuestionInProgress}
+                  setQuizzInProgress={setQuizzInProgress}
+                  setTopic={setTopic}
+                  IsCorrect={true}
+                />
+              ))}
+
           <button
             className="Submit"
             onClick={() => {
               setIsSubmited(true);
+              setQuestionInProgress(false);
             }}
             style={{
-              display: `${QuestionInProgress ? "" : "none"}`,
+              display: `${QuizzInProgress ? "" : "none"}`,
             }}
           >
-            <h1 style={{ color: "#fff", fontWeight: "500" }}>Submit Answer</h1>
+            <h1 style={{ color: "#fff", fontWeight: "500" }}>
+              {IsSubmited ? "Next Question" : "Submit Answer"}
+            </h1>
           </button>
         </div>
       </div>
