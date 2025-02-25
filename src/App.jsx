@@ -9,11 +9,19 @@ function App() {
   const [QuestionInProgress, setQuestionInProgress] = useState(false);
   const [QuizzInProgress, setQuizzInProgress] = useState(false);
   const [Topic, setTopic] = useState("none");
-  const [Question, setQuestion] = useState(data);
+  const [Question, setQuestion] = useState(null);
   const [step, setStep] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    setQuestion(data.find((el) => el.title === Topic));
+    const selectedQuestion = data.find((el) => el.title === Topic);
+    setQuestion(selectedQuestion);
+    // Reset step, selected answer and submission state when a new topic is selected
+    setStep(0);
+    setIsSubmited(false);
+    setSelectedAnswer(null);
+    setError("");
   }, [Topic]);
 
   return (
@@ -31,37 +39,45 @@ function App() {
       </div>
       {/* design end */}
       <div className="QuestionContainer">
-        <Txt />
+        <Txt
+          QuizzInProgress={QuizzInProgress}
+          question={Question}
+          step={step}
+        />
         <div className="AnswersBox">
           {QuizzInProgress
-            ? Question
-              ? Question.questions[step].options.map((el, i) => (
-                  <AnswButton
-                    BoxColor="#F4F6FA"
-                    img={null}
-                    Number={
-                      i == 0
-                        ? "A"
-                        : i == 1
-                        ? "B"
-                        : i == 2
-                        ? "C"
-                        : i == 3
-                        ? "D"
-                        : ""
-                    }
-                    Answr={el}
-                    IsSubmited={IsSubmited}
-                    QuestionInProgress={QuestionInProgress}
-                    setQuizzInProgress={setQuizzInProgress}
-                    IsCorrect={
-                      Question.questions[step].answer == el ? true : false
-                    }
-                  />
-                ))
-              : null
-            : data.map((el) => (
+            ? Question &&
+              Question.questions[step].options.map((el, i) => (
                 <AnswButton
+                  key={`${step}-${i}`}
+                  BoxColor="#F4F6FA"
+                  img={null}
+                  Number={
+                    i === 0
+                      ? "A"
+                      : i === 1
+                      ? "B"
+                      : i === 2
+                      ? "C"
+                      : i === 3
+                      ? "D"
+                      : ""
+                  }
+                  Answr={el}
+                  IsSubmited={IsSubmited}
+                  QuestionInProgress={QuestionInProgress}
+                  setQuizzInProgress={setQuizzInProgress}
+                  IsCorrect={Question.questions[step].answer === el}
+                  selected={selectedAnswer === i}
+                  onSelect={() => {
+                    setSelectedAnswer(i);
+                    setError("");
+                  }}
+                />
+              ))
+            : data.map((el, i) => (
+                <AnswButton
+                  key={i}
                   BoxColor={el.bg}
                   img={el.icon}
                   Number=""
@@ -75,11 +91,31 @@ function App() {
                 />
               ))}
 
+          {QuizzInProgress && error && (
+            <p style={{ color: "red", margin: "16px" }}>{error}</p>
+          )}
+
           <button
             className="Submit"
             onClick={() => {
-              setIsSubmited(true);
-              setQuestionInProgress(false);
+              if (QuizzInProgress && selectedAnswer === null) {
+                setError("Please select an answer");
+                return;
+              }
+              if (IsSubmited) {
+                if (Question && step < Question.questions.length - 1) {
+                  setStep(step + 1);
+                  setIsSubmited(false);
+                  setQuestionInProgress(true);
+                  setSelectedAnswer(null);
+                  setError("");
+                } else {
+                  alert("Quiz complete!");
+                }
+              } else {
+                setIsSubmited(true);
+                setQuestionInProgress(false);
+              }
             }}
             style={{
               display: `${QuizzInProgress ? "" : "none"}`,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./AnswButton.css";
 
 const AnswButton = ({
@@ -12,27 +12,27 @@ const AnswButton = ({
   setTopic,
   setQuizzInProgress,
   setQuestionInProgress,
+  selected,
+  onSelect,
 }) => {
-  const [isCliked, setisCliked] = useState(false);
-
   return (
     <div>
       <button
         className="AnswButton"
         style={{
           border: `${
-            isCliked & IsSubmited & IsCorrect
+            selected && IsSubmited && IsCorrect
               ? "3px solid #26D782"
-              : isCliked & IsSubmited & !IsCorrect
+              : selected && IsSubmited && !IsCorrect
               ? "3px solid #FF5252"
-              : isCliked & !IsSubmited
+              : selected && !IsSubmited
               ? "3px solid #A729F5"
               : "3px solid transparent"
           }`,
         }}
-        onClick={(e) => {
+        onClick={() => {
           if (QuestionInProgress) {
-            setisCliked(!isCliked);
+            onSelect();
           } else {
             setTopic(Answr);
             setQuizzInProgress(true);
@@ -45,11 +45,11 @@ const AnswButton = ({
           id="box"
           style={{
             backgroundColor: `${
-              IsCorrect & IsSubmited & isCliked
+              IsCorrect && IsSubmited && selected
                 ? "#26D782"
-                : !IsCorrect & IsSubmited & isCliked
+                : !IsCorrect && IsSubmited && selected
                 ? "#EE5454"
-                : isCliked & !IsSubmited
+                : selected && !IsSubmited
                 ? "#A729F5"
                 : BoxColor
             }`,
@@ -60,7 +60,7 @@ const AnswButton = ({
             src={img}
             alt=""
             style={{
-              width: `${img == "./CSS.png" ? "16px" : "22px"}`,
+              width: `${img === "./CSS.png" ? "16px" : "22px"}`,
               height: "22px",
               display: `${img == null ? "none" : ""}`,
             }}
@@ -73,15 +73,7 @@ const AnswButton = ({
           src="./Correct.png"
           alt=""
           style={{
-            opacity: `${
-              IsCorrect & !IsSubmited & isCliked
-                ? "0"
-                : IsCorrect & IsSubmited & isCliked
-                ? "1"
-                : IsCorrect & IsSubmited & !isCliked
-                ? "1"
-                : "0"
-            }`,
+            opacity: `${selected && IsSubmited && IsCorrect ? "1" : "0"}`,
           }}
         />
         <img
@@ -89,13 +81,7 @@ const AnswButton = ({
           src="./Incorrect.png"
           alt=""
           style={{
-            opacity: `${
-              !IsCorrect & !IsSubmited & isCliked
-                ? "0"
-                : !IsCorrect & IsSubmited & isCliked
-                ? "1"
-                : "0"
-            }`,
+            opacity: `${selected && IsSubmited && !IsCorrect ? "1" : "0"}`,
           }}
         />
       </button>
