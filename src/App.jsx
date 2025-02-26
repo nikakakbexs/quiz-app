@@ -22,8 +22,8 @@ function App() {
     setIsSubmited(false);
     setSelectedAnswer(null);
     setError("");
+  
   }, [Topic]);
-
   return (
     <div className="main">
       {/* design start */}
@@ -91,10 +91,6 @@ function App() {
                 />
               ))}
 
-          {QuizzInProgress && error && (
-            <p style={{ color: "red", margin: "16px" }}>{error}</p>
-          )}
-
           <button
             className="Submit"
             onClick={() => {
@@ -121,10 +117,21 @@ function App() {
               display: `${QuizzInProgress ? "" : "none"}`,
             }}
           >
-            <h1 style={{ color: "#fff", fontWeight: "500" }}>
+            <h1 style={{ color: "#fff", fontSize: "24px" }}>
               {IsSubmited ? "Next Question" : "Submit Answer"}
             </h1>
           </button>
+
+          {QuizzInProgress && error && (
+            <div className="errorMsg">
+              <img
+                src="Incorrect.png"
+                alt=""
+                style={{ width: "20px", height: "20px" }}
+              />
+              <p style={{ color: "red" }}> {error}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

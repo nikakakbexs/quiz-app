@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AnswButton.css";
 
 const AnswButton = ({
@@ -15,6 +15,8 @@ const AnswButton = ({
   selected,
   onSelect,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div>
       <button
@@ -39,6 +41,8 @@ const AnswButton = ({
             setQuestionInProgress(true);
           }
         }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <div
           className="box"
@@ -51,7 +55,14 @@ const AnswButton = ({
                 ? "#EE5454"
                 : selected && !IsSubmited
                 ? "#A729F5"
+                : !selected && !IsSubmited && isHovered && QuestionInProgress
+                ? "#F6E7FF"
                 : BoxColor
+            }`,
+            color: `${
+              !selected && !IsSubmited && isHovered && QuestionInProgress
+                ? "#A729F5"
+                : ""
             }`,
           }}
         >
@@ -73,7 +84,13 @@ const AnswButton = ({
           src="./Correct.png"
           alt=""
           style={{
-            opacity: `${selected && IsSubmited && IsCorrect ? "1" : "0"}`,
+            opacity: `${
+              selected && IsSubmited && IsCorrect
+                ? "1"
+                : !selected && IsSubmited && IsCorrect
+                ? "1"
+                : "0"
+            }`,
           }}
         />
         <img

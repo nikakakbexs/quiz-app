@@ -12,7 +12,9 @@ const Txt = ({ QuizzInProgress, question, step }) => {
           <h1 style={{ fontSize: "40px" }}>
             {question.questions[step].question}
           </h1>
-          <div className="ProgressBar" style={{ display: "none" }}></div>
+          <div className="ProgressBar">
+            <div className="innerBar" style={{ width: `${100 * (step + 1) / question.questions.length}%` }}></div>
+          </div>
         </>
       ) : (
         <>

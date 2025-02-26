@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Rubik";
   color: #313e51;
+}
+
+h1{
+  font-weight: 500;
 }
 
 button{
@@ -49,6 +55,7 @@ button{
   width: 960px;
   height: 356px;
   display: flex;
+  gap: 30px;
 }
 
 .AnswersBox {
@@ -68,4 +75,18 @@ button{
   width: 100%;
   place-items: center;
   font-size: 13px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.Submit:hover {
+  opacity: 0.7;
+}
+
+.errorMsg{
+  color: red;
+  align-self: center;
+  display: flex;
+  text-align: center;
+  gap: 8px;
 }
