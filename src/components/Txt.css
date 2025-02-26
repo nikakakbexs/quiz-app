@@ -1,9 +1,26 @@
 .container {
   width: 465px;
+  position: relative;
 }
 
 .smallParagraph {
   font-size: 16px;
   font-weight: 400;
   color: #626c7f;
+}
+
+.ProgressBar{
+  width: 100%;
+  padding: 4px 7px;
+  background-color: #fff;
+  border-radius: 999px;
+  position: absolute;
+  bottom: 0;
+}
+
+.innerBar{
+  background-color: #A729F5;
+  border-radius: 107px;
+  height: 7px;
+  transition: 0.3s ease;
 }
