@@ -53,35 +53,32 @@ function App() {
         {quizCompleted ? (
           <>
             {/* Left column: Final text */}
-            <div
-              className="finalLeft"
-              style={{
-                width: "465px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "flex-start",
-              }}
-            >
-              <p style={{ fontSize: "64px", margin: 0 }}>Quiz completed</p>
-              <p style={{ fontSize: "64px", margin: 0 }}>You scored...</p>
+            <div className="finalLeft">
+              <h1 style={{ fontSize: "50px" }}>
+                <span style={{ fontWeight: "300" }}> Quiz completed </span>{" "}
+                <br />
+                You scored...
+              </h1>
             </div>
             {/* Right column: Final score, score fraction, and Play Again button */}
-            <div
-              className="finalRight"
-              style={{
-                width: "480px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "20px",
-              }}
-            >
-              <p style={{ fontSize: "144px", margin: 0 }}>{score}</p>
-              <p style={{ fontSize: "24px", margin: 0 }}>
-                {score} / {Question.questions.length}
-              </p>
+            <div className="finalRight">
+              <div className="finalContiner">
+                <div>
+                  <div style={{ display: "flex", gap: "20px" }}>
+                    <div
+                      className="box"
+                      style={{ backgroundColor: Question.bg }}
+                    >
+                      <img className="TstImg" src={Question.icon} alt="" />
+                    </div>
+                    <h1>{Question.title}</h1>
+                  </div>
+                </div>
+                <p style={{ fontSize: "144px", fontWeight: "500" }}>{score}</p>
+                <p style={{ fontSize: "24px", fontWeight: "400" }}>
+                  out of {Question.questions.length}
+                </p>
+              </div>
               <button className="Submit" onClick={handlePlayAgain}>
                 <h1 style={{ color: "#fff", fontSize: "24px" }}>Play Again</h1>
               </button>

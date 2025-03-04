@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -8,11 +8,11 @@
   color: #313e51;
 }
 
-h1{
+h1 {
   font-weight: 500;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
@@ -83,10 +83,35 @@ button{
   opacity: 0.7;
 }
 
-.errorMsg{
+.errorMsg {
   color: red;
   align-self: center;
   display: flex;
   text-align: center;
   gap: 8px;
+}
+
+
+.finalLeft {
+  width: 480px;
+}
+
+.finalRight {
+  justify-self: flex-end;
+  width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.finalContiner{
+  background-color: #fff;
+  width: 100%;
+  padding: 30px 0;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
