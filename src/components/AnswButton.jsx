@@ -46,7 +46,6 @@ const AnswButton = ({
       >
         <div
           className="box"
-          id="box"
           style={{
             backgroundColor: `${
               IsCorrect && IsSubmited && selected
