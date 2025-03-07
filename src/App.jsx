@@ -16,6 +16,12 @@ function App() {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
+  // Toggle state for Dark/Light mode
+  const [isToggleChecked, setIsToggleChecked] = useState(false);
+  const handleToggle = () => {
+    setIsToggleChecked(!isToggleChecked);
+  };
+
   useEffect(() => {
     const selectedQuestion = data.find((el) => el.title === Topic);
     setQuestion(selectedQuestion);
@@ -36,7 +42,23 @@ function App() {
   };
 
   return (
-    <div className="main">
+    // Add the "dark" class if isToggleChecked is true
+    <div className={`main ${isToggleChecked ? "dark" : ""}`}>
+      {/* Toggle Button in Top Right */}
+      <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: "1000" }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={isToggleChecked}
+            onChange={handleToggle}
+            style={{ display: "none" }}
+          />
+          <div className={`toggle ${isToggleChecked ? "checked" : ""}`}>
+            <div className="ball"></div>
+          </div>
+        </label>
+      </div>
+
       {/* design start */}
       <div className="background"></div>
       <div className="decoration" style={{ left: "0", top: "0" }}>
@@ -96,49 +118,49 @@ function App() {
             <div className="AnswersBox">
               {QuizzInProgress
                 ? Question &&
-                  Question.questions[step].options.map((el, i) => (
-                    <AnswButton
-                      key={`${step}-${i}`}
-                      BoxColor="#F4F6FA"
-                      img={null}
-                      Number={
-                        i === 0
-                          ? "A"
-                          : i === 1
+                Question.questions[step].options.map((el, i) => (
+                  <AnswButton
+                    key={`${step}-${i}`}
+                    BoxColor="#F4F6FA"
+                    img={null}
+                    Number={
+                      i === 0
+                        ? "A"
+                        : i === 1
                           ? "B"
                           : i === 2
-                          ? "C"
-                          : i === 3
-                          ? "D"
-                          : ""
-                      }
-                      Answr={el}
-                      IsSubmited={IsSubmited}
-                      QuestionInProgress={QuestionInProgress}
-                      setQuizzInProgress={setQuizzInProgress}
-                      IsCorrect={Question.questions[step].answer === el}
-                      selected={selectedAnswer === i}
-                      onSelect={() => {
-                        setSelectedAnswer(i);
-                        setError("");
-                      }}
-                    />
-                  ))
+                            ? "C"
+                            : i === 3
+                              ? "D"
+                              : ""
+                    }
+                    Answr={el}
+                    IsSubmited={IsSubmited}
+                    QuestionInProgress={QuestionInProgress}
+                    setQuizzInProgress={setQuizzInProgress}
+                    IsCorrect={Question.questions[step].answer === el}
+                    selected={selectedAnswer === i}
+                    onSelect={() => {
+                      setSelectedAnswer(i);
+                      setError("");
+                    }}
+                  />
+                ))
                 : data.map((el, i) => (
-                    <AnswButton
-                      key={i}
-                      BoxColor={el.bg}
-                      img={el.icon}
-                      Number=""
-                      Answr={el.title}
-                      IsSubmited={IsSubmited}
-                      QuestionInProgress={QuestionInProgress}
-                      setQuestionInProgress={setQuestionInProgress}
-                      setQuizzInProgress={setQuizzInProgress}
-                      setTopic={setTopic}
-                      IsCorrect={true}
-                    />
-                  ))}
+                  <AnswButton
+                    key={i}
+                    BoxColor={el.bg}
+                    img={el.icon}
+                    Number=""
+                    Answr={el.title}
+                    IsSubmited={IsSubmited}
+                    QuestionInProgress={QuestionInProgress}
+                    setQuestionInProgress={setQuestionInProgress}
+                    setQuizzInProgress={setQuizzInProgress}
+                    setTopic={setTopic}
+                    IsCorrect={true}
+                  />
+                ))}
 
               {QuizzInProgress && error && (
                 <div className="errorMsg">
@@ -175,7 +197,7 @@ function App() {
                       if (
                         Question &&
                         Question.questions[step].options[selectedAnswer] ===
-                          Question.questions[step].answer
+                        Question.questions[step].answer
                       ) {
                         setScore((prev) => prev + 1);
                       }
