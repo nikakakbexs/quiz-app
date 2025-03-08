@@ -16,10 +16,14 @@ function App() {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
+  const [isToggleChecked, setIsToggleChecked] = useState(false);
+  const handleToggle = () => {
+    setIsToggleChecked(!isToggleChecked);
+  };
+
   useEffect(() => {
     const selectedQuestion = data.find((el) => el.title === Topic);
     setQuestion(selectedQuestion);
-    // Reset state when a new topic is selected
     setStep(0);
     setIsSubmited(false);
     setSelectedAnswer(null);
@@ -28,16 +32,40 @@ function App() {
     setQuizCompleted(false);
   }, [Topic]);
 
-  const handlePlayAgain = () => {
-    // Reset to the initial state where the topic selection page is shown
+  const handlePlayAgain = () => {shown
     setTopic("none");
     setQuizzInProgress(false);
     setQuestionInProgress(false);
   };
 
   return (
-    <div className="main">
-      {/* design start */}
+    <div className={`main ${isToggleChecked ? "dark" : ""}`}>
+      <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: "1000" }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={isToggleChecked}
+            onChange={handleToggle}
+            style={{ display: "none" }}
+          />
+          <div className={`toggle ${isToggleChecked ? "checked" : ""}`}>
+            <img
+              src="./public/moon.png"
+              alt="Moon icon"
+              className="toggle-icon toggle-icon-moon"
+            />
+
+            <div className="ball"></div>
+
+            <img
+              src="./public/sun (1).png"
+              alt="Sun icon"
+              className="toggle-icon toggle-icon-sun"
+            />
+          </div>
+        </label>
+      </div>
+
       <div className="background"></div>
       <div className="decoration" style={{ left: "0", top: "0" }}>
         <div className="minisircle"></div>
@@ -48,11 +76,9 @@ function App() {
       >
         <div className="minisircle"></div>
       </div>
-      {/* design end */}
       <div className="QuestionContainer">
         {quizCompleted ? (
           <>
-            {/* Left column: Final text */}
             <div className="finalLeft">
               <h1 className="title">
                 <span style={{ fontWeight: "300" }}> Quiz completed </span>{" "}
@@ -60,7 +86,6 @@ function App() {
                 You scored...
               </h1>
             </div>
-            {/* Right column: Final score, score fraction, and Play Again button */}
             <div className="finalRight">
               <div className="finalContiner">
                 <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
@@ -79,59 +104,57 @@ function App() {
           </>
         ) : (
           <>
-            {/* Quiz in progress: Question text on the left */}
             <Txt
               QuizzInProgress={QuizzInProgress}
               question={Question}
               step={step}
             />
-            {/* Quiz in progress: Answer buttons, submit button, error msg on the right */}
             <div className="AnswersBox">
               {QuizzInProgress
                 ? Question &&
-                  Question.questions[step].options.map((el, i) => (
-                    <AnswButton
-                      key={`${step}-${i}`}
-                      BoxColor="#F4F6FA"
-                      img={null}
-                      Number={
-                        i === 0
-                          ? "A"
-                          : i === 1
+                Question.questions[step].options.map((el, i) => (
+                  <AnswButton
+                    key={`${step}-${i}`}
+                    BoxColor="#F4F6FA"
+                    img={null}
+                    Number={
+                      i === 0
+                        ? "A"
+                        : i === 1
                           ? "B"
                           : i === 2
-                          ? "C"
-                          : i === 3
-                          ? "D"
-                          : ""
-                      }
-                      Answr={el}
-                      IsSubmited={IsSubmited}
-                      QuestionInProgress={QuestionInProgress}
-                      setQuizzInProgress={setQuizzInProgress}
-                      IsCorrect={Question.questions[step].answer === el}
-                      selected={selectedAnswer === i}
-                      onSelect={() => {
-                        setSelectedAnswer(i);
-                        setError("");
-                      }}
-                    />
-                  ))
+                            ? "C"
+                            : i === 3
+                              ? "D"
+                              : ""
+                    }
+                    Answr={el}
+                    IsSubmited={IsSubmited}
+                    QuestionInProgress={QuestionInProgress}
+                    setQuizzInProgress={setQuizzInProgress}
+                    IsCorrect={Question.questions[step].answer === el}
+                    selected={selectedAnswer === i}
+                    onSelect={() => {
+                      setSelectedAnswer(i);
+                      setError("");
+                    }}
+                  />
+                ))
                 : data.map((el, i) => (
-                    <AnswButton
-                      key={i}
-                      BoxColor={el.bg}
-                      img={el.icon}
-                      Number=""
-                      Answr={el.title}
-                      IsSubmited={IsSubmited}
-                      QuestionInProgress={QuestionInProgress}
-                      setQuestionInProgress={setQuestionInProgress}
-                      setQuizzInProgress={setQuizzInProgress}
-                      setTopic={setTopic}
-                      IsCorrect={true}
-                    />
-                  ))}
+                  <AnswButton
+                    key={i}
+                    BoxColor={el.bg}
+                    img={el.icon}
+                    Number=""
+                    Answr={el.title}
+                    IsSubmited={IsSubmited}
+                    QuestionInProgress={QuestionInProgress}
+                    setQuestionInProgress={setQuestionInProgress}
+                    setQuizzInProgress={setQuizzInProgress}
+                    setTopic={setTopic}
+                    IsCorrect={true}
+                  />
+                ))}
 
               {QuizzInProgress && (
                 <button
@@ -149,15 +172,13 @@ function App() {
                         setSelectedAnswer(null);
                         setError("");
                       } else {
-                        // Last question has been submitted – show the final screen
                         setQuizCompleted(true);
                       }
                     } else {
-                      // On first submission, update the score if the selected answer is correct
                       if (
                         Question &&
                         Question.questions[step].options[selectedAnswer] ===
-                          Question.questions[step].answer
+                        Question.questions[step].answer
                       ) {
                         setScore((prev) => prev + 1);
                       }

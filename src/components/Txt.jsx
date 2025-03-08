@@ -6,14 +6,25 @@ const Txt = ({ QuizzInProgress, question, step }) => {
     <div className="container">
       {QuizzInProgress && question ? (
         <>
+          <div className="topicInfo">
+            <img
+              src={question.icon}
+              alt={question.title}
+              className="topicIcon"
+            />
+            <h2 className="topicTitle">{question.title}</h2>
+          </div>
           <p className="smallParagraph">
             Question {step + 1} of {question.questions.length}
           </p>
-          <h1 className="Question">
-            {question.questions[step].question}
-          </h1>
+          <h1 className="Question">{question.questions[step].question}</h1>
           <div className="ProgressBar">
-            <div className="innerBar" style={{ width: `${100 * (step + 1) / question.questions.length}%` }}></div>
+            <div
+              className="innerBar"
+              style={{
+                width: `${(100 * (step + 1)) / question.questions.length}%`,
+              }}
+            ></div>
           </div>
         </>
       ) : (

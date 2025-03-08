@@ -38,7 +38,7 @@
 }
 
 @media screen and (width < 769px) {
-  .container{
+  .container {
     height: 200px;
     scale: 0.9;
     margin-bottom: 10px;

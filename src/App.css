@@ -120,8 +120,8 @@ button {
   gap: 20px;
 }
 
-.finalContiner h1{
-    font-size: 22px;
+.finalContiner h1 {
+  font-size: 22px;
 }
 
 .score {
@@ -129,7 +129,7 @@ button {
   font-weight: 500;
 }
 
-.FinalScore{
+.FinalScore {
   font-size: 24px;
   font-weight: 400;
 }
@@ -182,7 +182,7 @@ button {
     scale: 0.9;
   }
 
-  .finalContiner div{
+  .finalContiner div {
     scale: 0.9;
   }
 
