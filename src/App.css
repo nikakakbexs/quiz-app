@@ -59,7 +59,7 @@ button {
 }
 
 .AnswersBox {
-  width: 480px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -70,7 +70,7 @@ button {
   border: none;
   outline: none;
   background-color: #a729f5;
-  border-radius: 24px;
+  border-radius: 12px;
   display: grid;
   width: 100%;
   place-items: center;
@@ -91,20 +91,24 @@ button {
   gap: 8px;
 }
 
+.erorImg {
+  width: 20px;
+  height: 20px;
+}
 
 .finalLeft {
-  width: 480px;
+  width: 100%;
 }
 
 .finalRight {
   justify-self: flex-end;
-  width: 480px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.finalContiner{
+.finalContiner {
   background-color: #fff;
   width: 100%;
   padding: 30px 0;
@@ -114,4 +118,81 @@ button {
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.finalContiner h1{
+    font-size: 22px;
+}
+
+.score {
+  font-size: 144px;
+  font-weight: 500;
+}
+
+.FinalScore{
+  font-size: 24px;
+  font-weight: 400;
+}
+
+@media screen and (width < 769px) {
+  .QuestionContainer {
+    flex-direction: column;
+    padding: 64px;
+    gap: 0;
+  }
+  .background {
+    display: none;
+  }
+  .decoration {
+    display: none;
+  }
+  .minisircle {
+    display: none;
+  }
+
+  .main {
+    align-items: normal;
+    justify-content: normal;
+    background-color: #f4f6fa;
+  }
+
+  .AnswersBox {
+    margin-top: 20px;
+    gap: 5px;
+  }
+
+  .Submit {
+    scale: 0.9;
+  }
+
+  .errorMsg {
+    font-size: 14px;
+  }
+
+  .erorImg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .finalLeft {
+    scale: 0.9;
+  }
+
+  .finalContiner {
+    scale: 0.9;
+  }
+
+  .finalContiner div{
+    scale: 0.9;
+  }
+
+  .score {
+    font-size: 110px;
+  }
+}
+
+@media screen and (width < 426px) {
+  .QuestionContainer {
+    padding: 10px;
+  }
 }

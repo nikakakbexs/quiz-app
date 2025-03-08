@@ -9,7 +9,7 @@ const Txt = ({ QuizzInProgress, question, step }) => {
           <p className="smallParagraph">
             Question {step + 1} of {question.questions.length}
           </p>
-          <h1 style={{ fontSize: "40px" }}>
+          <h1 className="Question">
             {question.questions[step].question}
           </h1>
           <div className="ProgressBar">
@@ -21,11 +21,11 @@ const Txt = ({ QuizzInProgress, question, step }) => {
           <p className="smallParagraph" style={{ display: "none" }}>
             Question 0 of 10
           </p>
-          <h1 style={{ fontSize: "50px" }}>
+          <h1 className="title">
             <span style={{ fontWeight: "300" }}> Welcome to the </span> <br />{" "}
             Frontend Quiz!
           </h1>
-          <p className="smallParagraph" style={{ marginTop: "48px" }}>
+          <p className="smallParagraph semiTitle">
             Pick a subject to get started.
           </p>
         </>

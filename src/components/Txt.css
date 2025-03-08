@@ -1,5 +1,5 @@
 .container {
-  width: 465px;
+  width: 100%;
   position: relative;
 }
 
@@ -9,7 +9,7 @@
   color: #626c7f;
 }
 
-.ProgressBar{
+.ProgressBar {
   width: 100%;
   padding: 4px 7px;
   background-color: #fff;
@@ -18,9 +18,53 @@
   bottom: 0;
 }
 
-.innerBar{
-  background-color: #A729F5;
+.innerBar {
+  background-color: #a729f5;
   border-radius: 107px;
   height: 7px;
   transition: 0.3s ease;
+}
+
+.title {
+  font-size: 50px;
+}
+
+.Question {
+  font-size: 40px;
+}
+
+.semiTitle {
+  margin-top: 48px;
+}
+
+@media screen and (width < 769px) {
+  .container{
+    height: 200px;
+    scale: 0.9;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 45px;
+  }
+
+  .Question {
+    font-size: 30px;
+    padding: 12px 0 40px 0;
+  }
+
+  .semiTitle {
+    margin-top: 28px;
+  }
+}
+
+@media screen and (width < 426px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .Question {
+    font-size: 25px;
+    padding: 12px 0 40px 0;
+  }
 }
