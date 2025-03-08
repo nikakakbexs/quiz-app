@@ -16,7 +16,6 @@ function App() {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
-  // Toggle state for Dark/Light mode
   const [isToggleChecked, setIsToggleChecked] = useState(false);
   const handleToggle = () => {
     setIsToggleChecked(!isToggleChecked);
@@ -25,7 +24,6 @@ function App() {
   useEffect(() => {
     const selectedQuestion = data.find((el) => el.title === Topic);
     setQuestion(selectedQuestion);
-    // Reset state when a new topic is selected
     setStep(0);
     setIsSubmited(false);
     setSelectedAnswer(null);
@@ -34,17 +32,14 @@ function App() {
     setQuizCompleted(false);
   }, [Topic]);
 
-  const handlePlayAgain = () => {
-    // Reset to the initial state where the topic selection page is shown
+  const handlePlayAgain = () => {shown
     setTopic("none");
     setQuizzInProgress(false);
     setQuestionInProgress(false);
   };
 
   return (
-    // Add the "dark" class if isToggleChecked is true
     <div className={`main ${isToggleChecked ? "dark" : ""}`}>
-      {/* Toggle Button in Top Right */}
       <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: "1000" }}>
         <label>
           <input
@@ -54,12 +49,23 @@ function App() {
             style={{ display: "none" }}
           />
           <div className={`toggle ${isToggleChecked ? "checked" : ""}`}>
+            <img
+              src="./public/moon.png"
+              alt="Moon icon"
+              className="toggle-icon toggle-icon-moon"
+            />
+
             <div className="ball"></div>
+
+            <img
+              src="./public/sun (1).png"
+              alt="Sun icon"
+              className="toggle-icon toggle-icon-sun"
+            />
           </div>
         </label>
       </div>
 
-      {/* design start */}
       <div className="background"></div>
       <div className="decoration" style={{ left: "0", top: "0" }}>
         <div className="minisircle"></div>
@@ -70,11 +76,9 @@ function App() {
       >
         <div className="minisircle"></div>
       </div>
-      {/* design end */}
       <div className="QuestionContainer">
         {quizCompleted ? (
           <>
-            {/* Left column: Final text */}
             <div className="finalLeft">
               <h1 style={{ fontSize: "50px" }}>
                 <span style={{ fontWeight: "300" }}> Quiz completed </span>{" "}
@@ -82,7 +86,6 @@ function App() {
                 You scored...
               </h1>
             </div>
-            {/* Right column: Final score, score fraction, and Play Again button */}
             <div className="finalRight">
               <div className="finalContiner">
                 <div>
@@ -108,13 +111,11 @@ function App() {
           </>
         ) : (
           <>
-            {/* Quiz in progress: Question text on the left */}
             <Txt
               QuizzInProgress={QuizzInProgress}
               question={Question}
               step={step}
             />
-            {/* Quiz in progress: Answer buttons, submit button, error msg on the right */}
             <div className="AnswersBox">
               {QuizzInProgress
                 ? Question &&
@@ -189,11 +190,9 @@ function App() {
                         setSelectedAnswer(null);
                         setError("");
                       } else {
-                        // Last question has been submitted – show the final screen
                         setQuizCompleted(true);
                       }
                     } else {
-                      // On first submission, update the score if the selected answer is correct
                       if (
                         Question &&
                         Question.questions[step].options[selectedAnswer] ===

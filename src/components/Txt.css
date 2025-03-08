@@ -24,3 +24,23 @@
   height: 7px;
   transition: 0.3s ease;
 }
+
+
+.topicInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.topicIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.topicTitle {
+  font-size: 24px;
+  margin: 0;
+  color: inherit;
+}

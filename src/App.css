@@ -126,6 +126,8 @@ button {
   cursor: pointer;
   transition: background-color 0.3s;
   display: inline-block;
+
+  position: relative;
 }
 
 .toggle.checked {
@@ -143,6 +145,23 @@ button {
 
 .toggle.checked .ball {
   transform: translateX(20px);
+}
+
+.toggle-icon {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 6px;
+  margin-right: 50px;
+}
+
+.toggle-icon-moon {
+  left: 6px;
+  margin-left: 50px;
+}
+
+.toggle-icon-sun {
+  right: 6px;
 }
 
 .dark .background {
