@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AnswButton.css";
+import Header from "./header";
 
 const AnswButton = ({
   Answr,
@@ -17,8 +18,14 @@ const AnswButton = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  return (
+  return ( 
+  <>  
+  
+  
+
+  
     <div>
+      
       <button
         className="AnswButton"
         style={{
@@ -102,6 +109,7 @@ const AnswButton = ({
         />
       </button>
     </div>
+    </>
   );
 };
 
