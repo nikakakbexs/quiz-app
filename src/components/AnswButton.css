@@ -50,7 +50,7 @@
     transition: 0.3s ease;
 }
 
-@media screen and (width < 769px) {
+@media screen and (width < 1000px) {
   .AnswButton{
     padding: 8px;
     scale: 0.9;

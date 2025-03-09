@@ -6,14 +6,6 @@ const Txt = ({ QuizzInProgress, question, step }) => {
     <div className="container">
       {QuizzInProgress && question ? (
         <>
-          <div className="topicInfo">
-            <img
-              src={question.icon}
-              alt={question.title}
-              className="topicIcon"
-            />
-            <h2 className="topicTitle">{question.title}</h2>
-          </div>
           <p className="smallParagraph">
             Question {step + 1} of {question.questions.length}
           </p>

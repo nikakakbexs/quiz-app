@@ -51,8 +51,25 @@ button {
   align-items: center;
 }
 
-.QuestionContainer {
+.mainContainer {
   width: 960px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Header {
+  width: 100%;
+  padding: 20px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  bottom: 50px;
+}
+
+.QuestionContainer {
+  width: 100%;
   height: 356px;
   display: flex;
   gap: 30px;
@@ -134,14 +151,117 @@ button {
   font-weight: 400;
 }
 
-@media screen and (width < 769px) {
+.swich {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggleIcon {
+  position: absolute;
+  right: 0;
+}
+
+.toggle {
+  justify-self: flex-end;
+  width: 48px;
+  height: 28px;
+  border-radius: 999px;
+  background-color: #a729f5;
+  padding: 4px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.toggle.checked {
+  background-color: #a729f5;
+}
+
+.toggle .ball {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  transform: translateX(0);
+}
+
+.toggle.checked .ball {
+  transform: translateX(20px);
+}
+
+.toggle-icon {
+  /* position: absolute; */
+  width: 16px;
+  height: 16px;
+  /* top: 6px;
+  margin-right: 50px; */
+}
+
+/* .toggle-icon-moon {
+  left: 6px;
+  margin-left: 50px;
+}
+
+.toggle-icon-sun {
+  right: 6px;
+} */
+
+.dark .background {
+  background-color: #3c465f;
+}
+
+.dark .decoration {
+  background-color: #2f364a;
+}
+
+.dark .minisircle {
+  background-color: #3c465f;
+}
+
+.dark h1 {
+  color: #fff;
+}
+
+.dark .container {
+  color: #fff;
+}
+
+.dark .AnswersBox h1 {
+  color: #fff;
+}
+
+.dark .AnswButton {
+  background-color: hsl(223, 23%, 33%);
+  color: #fff;
+}
+
+.dark .container h1 span {
+  color: rgb(255, 255, 255);
+}
+
+.dark .finalContiner {
+  background-color: rgba(59, 77, 102, 1);
+}
+
+.dark .finalContiner p {
+  color: #fff;
+}
+
+.dark .title span {
+  color: #fff;
+}
+
+.dark .ProgressBar {
+  background-color: rgba(59, 77, 102, 1);
+}
+
+@media screen and (width < 1000px) {
   .QuestionContainer {
     flex-direction: column;
-    padding: 64px;
     gap: 0;
-  }
-  .background {
-    display: none;
   }
   .decoration {
     display: none;
@@ -150,10 +270,18 @@ button {
     display: none;
   }
 
-  .main {
-    align-items: normal;
+  .mainContainer {
     justify-content: normal;
-    background-color: #f4f6fa;
+    padding: 0 64px;
+  }
+
+  .Header {
+    bottom: 0;
+    padding: 20px 5%;
+  }
+
+  .toggleIcon {
+    right: 5%;
   }
 
   .AnswersBox {
@@ -192,7 +320,7 @@ button {
 }
 
 @media screen and (width < 426px) {
-  .QuestionContainer {
-    padding: 10px;
+  .mainContainer {
+    padding: 0 10px;
   }
 }
