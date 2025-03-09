@@ -37,9 +37,9 @@
   margin-top: 48px;
 }
 
-@media screen and (width < 769px) {
+@media screen and (width < 1000px) {
   .container {
-    height: 200px;
+    /* height: 200px; */
     scale: 0.9;
     margin-bottom: 10px;
   }

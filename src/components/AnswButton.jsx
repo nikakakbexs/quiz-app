@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./AnswButton.css";
-import Header from "./header";
 
 const AnswButton = ({
   Answr,
